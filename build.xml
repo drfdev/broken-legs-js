@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<project name="broken-legs" default="full-build">
+
+    <property name="src" location="src"/>
+    <property name="target" location="target"/>
+    <!-- bin -->
+    <property name="bin" location="bin"/>
+    <property name="bin-min" location="${bin}/broken-legs-min.js"/>
+    <property name="bin-js" location="${bin}/broken-legs.js"/>
+    <!-- libs -->
+    <property name="lib" location="lib"/>
+    <property name="lib-jq" location="${lib}/jquery-3.4.1.js"/>
+    <property name="lib-min" location="${lib}/yuicompressor-2.4.8.jar"/>
+    <!-- examples -->
+    <property name="exp" location="examples"/>
+    <property name="exp-js" location="${exp}/js"/>
+
+    <target name="full-build" depends="exp-build">
+        <!-- Full Build -->
+        <!--
+        Result:
+        bin/broken-legs-min.js
+        bin/broken-legs.js
+        -->
+    </target>
+
+    <target name="exp-build" depends="js-minify">
+        <copy todir="${exp-js}" file="${bin-min}" />
+        <copy todir="${exp-js}" file="${lib-min}" />
+    </target>
+
+    <target name="js-minify" depends="js-build">
+        <apply executable="java" parallel="false">
+            <fileset dir="${bin}" includes="broken-legs.js"/>
+            <arg line="-jar"/>
+            <arg path="${lib-min}"/>
+            <srcfile />
+            <arg line="-o"/>
+            <arg value="${bin-min}"/>
+            <mapper type="glob" from="*.js" to="*-min.js"/>
+            <targetfile />
+        </apply>
+    </target>
+
+    <target name="js-build" depends="copy">
+        <concat destfile="${bin-js}">
+            <fileset dir="${target}">
+                <include name="*.js"/>
+            </fileset>
+        </concat>
+    </target>
+
+    <target name="copy" depends="clear">
+        <copy todir="${target}">
+            <fileset dir="${src}">
+                <include name="*.js"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="clear">
+        <delete>
+            <fileset dir="${target}">
+                <include name="*"/>
+            </fileset>
+        </delete>
+        <delete>
+            <fileset dir="${bin}">
+                <include name="*"/>
+            </fileset>
+        </delete>
+    </target>
+</project>
