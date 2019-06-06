@@ -1,1 +1,1 @@
-var BROKEN_LEGS=window.BROKEN_LEGS||{};
+var BROKEN_LEGS=window.BROKEN_LEGS||{};(function(){})();

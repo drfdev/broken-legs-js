@@ -14,8 +14,11 @@
     <!-- examples -->
     <property name="exp" location="examples"/>
     <property name="exp-js" location="${exp}/js"/>
+    <!-- css -->
+    <property name="css-src" location="themes"/>
+    <property name="css-exp" location="${exp}/css"/>
 
-    <target name="full-build" depends="exp-build">
+    <target name="full-build" depends="exp-build, copy-css">
         <!-- Full Build -->
         <!--
         Result:
@@ -24,9 +27,23 @@
         -->
     </target>
 
+    <target name="copy-css">
+        <copy todir="${css-exp}">
+            <fileset dir="${css-src}">
+                <include name="*.css"/>
+            </fileset>
+        </copy>
+        <copy todir="${bin}">
+            <fileset dir="${css-src}">
+                <include name="*.css"/>
+            </fileset>
+        </copy>
+    </target>
+
     <target name="exp-build" depends="js-minify">
         <copy todir="${exp-js}" file="${bin-min}" />
-        <copy todir="${exp-js}" file="${lib-min}" />
+        <!--<copy todir="${exp-js}" file="${lib-min}" />-->
+        <copy todir="${exp-js}" file="${lib-jq}" />
     </target>
 
     <target name="js-minify" depends="js-build">
