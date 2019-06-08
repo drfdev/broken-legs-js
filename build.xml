@@ -76,6 +76,8 @@
     </target>
 
     <target name="clear">
+        <mkdir dir="${bin}"/>
+        <mkdir dir="${target}"/>
         <delete>
             <fileset dir="${target}">
                 <include name="*"/>
