@@ -3,5 +3,5 @@ file: panel.js
 import: _main.js
 */
 (function () {
-    var _bl = window.BROKEN_LEGS;
+    var _bl = window.BROKEN_LEGS; // $BL
 })();

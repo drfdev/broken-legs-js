@@ -1,5 +1,5 @@
 /**
-file: tab.js
+file: grid.js
 import: _main.js
 */
 (function () {

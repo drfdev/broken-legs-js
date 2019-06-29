@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>panel
+<!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="UTF-8" />
@@ -13,9 +13,20 @@
 
 <body>
 
+<input type="button" id="button1" value="button1"/>
+<br/>
+<input type="text" id="button2" value="button2"/>
+<br/>
+<button id="button3">button3</button>
+<br/>
+<input type="submit" id="submit1"/>
+<br/>
 <script>
 $(document).ready(function () {
-
+    $BL.build('button1', 'button'); // get by id
+    $BL.build($('#button2'), 'button'); // get by object
+    $BL.build(document.getElementById('button3'), 'button'); // get by id, with document-version
+    $BL.button('button4'); // example with button-function
 });
 </script>
 </body>
