@@ -49,12 +49,24 @@ var BROKEN_LEGS = window.BROKEN_LEGS || {
         if ($.type(element) === 'string') {
             element = $('#' + element)
         }
+        if (element.length == 0) {
+            // element does not exists
+            return;
+        }
         var widget = window.BROKEN_LEGS.widgets[widgetName];
         if ($.type(widget) !== 'undefined') {
             if (widget.isApply(element)) {
                 widget.applyWidget(element, options);
             }
         }
+    },
+// Utility functions:
+    tagName : function (element) {
+        var el$ = $(element);
+        if (el$.length == 0) {
+            return '';
+        }
+        return el$.prop('tagName').toLowerCase();
     }
 };
 /**
